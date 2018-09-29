@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.albenyuan.mybatis.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.albenyuan.mybatis.model.Menu">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="enabled" jdbcType="BIT" property="enabled"/>
+    </resultMap>
+
+    <resultMap id="treeMap" type="com.albenyuan.mybatis.model.Menu" extends="BaseResultMap">
+        <collection column="id" property="children" javaType="ArrayList" select="findTreeMenuByParentId"/>
+    </resultMap>
+
+    <resultMap id="parentMap" type="com.albenyuan.mybatis.model.Menu" extends="BaseResultMap">
+        <association property="parent" column="parent_id" select="findMenuWithParentById"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, name, url, icon, parent_id, enabled
+    </sql>
+
+    <sql id="Base_Table_Name">`menu`</sql>
+
+
+    <select id="findById" parameterType="long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
+        WHERE id=#{0}
+    </select>
+
+
+    <select id="findByParentId" parameterType="long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
+        WHERE `parent_id` = #{0}
+    </select>
+
+    <select id="findParentById" parameterType="long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
+        RIGHT JOIN (
+        SELECT parent_id as pid from
+        <include refid="Base_Table_Name"/>
+        WHERE id = #{0}) c on id = c.pid
+        limit 1;
+    </select>
+
+
+    <select id="findTreeMenuByParentId" parameterType="long" resultMap="treeMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
+        WHERE parent_id = #{0}
+    </select>
+
+    <select id="findMenuWithParentById" parameterType="long" resultMap="parentMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="Base_Table_Name"/>
+        WHERE id = #{0}
+    </select>
+
+
+</mapper>

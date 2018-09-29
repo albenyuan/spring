@@ -1,6 +1,6 @@
-package com.albenyuan.common.data.service.impl;
+package com.albenyuan.core.data.service.impl;
 
-import com.albenyuan.common.data.service.BaseService;
+import com.albenyuan.core.data.service.BaseService;
 
 /**
  * @Author Alben Yuan

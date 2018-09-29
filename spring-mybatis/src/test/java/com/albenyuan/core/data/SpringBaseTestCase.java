@@ -1,4 +1,4 @@
-package com.albenyuan.common.data;
+package com.albenyuan.core.data;
 
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;

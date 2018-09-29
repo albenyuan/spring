@@ -1,6 +1,6 @@
 package com.albenyuan.mybatis.mapper;
 
-import com.albenyuan.common.data.SpringBaseTestCase;
+import com.albenyuan.core.data.SpringBaseTestCase;
 import com.albenyuan.mybatis.model.User;
 import org.junit.Assert;
 import org.junit.Test;

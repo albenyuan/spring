@@ -1,14 +1,12 @@
 package com.albenyuan.mybatis.model;
 
-import com.albenyuan.common.data.model.BaseModel;
+import com.albenyuan.core.data.model.BaseModel;
 
 /**
  * @Author Alben Yuan
  * @Date 2018-09-28 17:17
  */
 public class User extends BaseModel {
-
-    private Long id;
 
     private String username;
 
@@ -18,14 +16,6 @@ public class User extends BaseModel {
 
     private String email;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

@@ -1,4 +1,4 @@
-package com.albenyuan.common.data.service;
+package com.albenyuan.core.data.service;
 
 /**
  * @Author Alben Yuan

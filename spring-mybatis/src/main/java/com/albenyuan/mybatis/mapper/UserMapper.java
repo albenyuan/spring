@@ -1,6 +1,6 @@
 package com.albenyuan.mybatis.mapper;
 
-import com.albenyuan.common.data.mapper.BaseMapper;
+import com.albenyuan.core.data.mapper.BaseMapper;
 import com.albenyuan.mybatis.model.User;
 import org.springframework.stereotype.Repository;
 

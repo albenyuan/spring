@@ -1,6 +1,6 @@
-package com.albenyuan.common.data.mapper;
+package com.albenyuan.core.data.mapper;
 
-import com.albenyuan.common.data.model.BaseModel;
+import com.albenyuan.core.data.model.BaseModel;
 
 /**
  * @Author Alben Yuan
