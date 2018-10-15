@@ -11,6 +11,7 @@
     <modules>
         <module>spring-mybatis</module>
         <module>spring-elasticsearch</module>
+        <module>spring-dubbo</module>
     </modules>
 
     <properties>
@@ -72,6 +73,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
