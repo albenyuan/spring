@@ -1,4 +1,4 @@
-package com.albenyuan.dubb.common;
+package com.albenyuan.dubbo.common;
 
 /**
  * @Author Alben Yuan

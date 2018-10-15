@@ -1,6 +1,6 @@
 package com.albenyuan.dubbo.service;
 
-import com.albenyuan.dubb.common.BaseService;
+import com.albenyuan.dubbo.common.BaseService;
 import com.albenyuan.dubbo.data.model.User;
 
 /**
