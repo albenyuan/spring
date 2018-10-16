@@ -1,6 +1,7 @@
 package com.albenyuan.dubbo.mvc;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -14,17 +15,18 @@ public class BaseResult<T> implements Serializable {
     public static final Integer SUCCESS = 0;
     public static final Integer ERROR = -1;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer code;
 
-    private BaseResult() {
-    }
 
     public static BaseResult success() {
-        return success(new Object());
+        return success(new HashMap<>());
     }
 
     public static BaseResult success(Object object) {
@@ -52,4 +54,28 @@ public class BaseResult<T> implements Serializable {
         return failure(ERROR, message);
     }
 
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 }
