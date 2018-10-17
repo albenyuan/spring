@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <mvc:annotation-driven/>
+    <!--先让dubbo扫描controller层,可以避免出现NullPoint空指针问题 -->
+    <dubbo:annotation package="com.albenyuan.dubbo.api"/>
+    <!--配置扫描包 -->
+    <context:component-scan base-package="com.albenyuan.dubbo"/>
+
+    <!--引用dubbo服务 -->
+    <dubbo:application name="spring-dubbo-consumer"/>
+
+    <!--设置超时时间 -->
+    <dubbo:consumer timeout="100000"/>
+    <dubbo:protocol port="20880"/>
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
+
+
+</beans>
