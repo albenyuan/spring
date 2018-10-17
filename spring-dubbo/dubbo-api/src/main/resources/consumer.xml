@@ -11,7 +11,7 @@
     <context:component-scan base-package="com.albenyuan.dubbo.*"/>
 
     <dubbo:application name="spring-dubbo"/>
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://localhost:2181"/>
 
     <dubbo:protocol port="20880"/>
 
@@ -19,6 +19,6 @@
     <!--<dubbo:annotation package="com.albenyuan.dubbo.service.impl"/>-->
 
     <dubbo:reference id="userService" timeout="10000" check="false"
-    interface="com.albenyuan.dubbo.service.UserService"/>
+                     interface="com.albenyuan.dubbo.service.UserService"/>
 
 </beans>
