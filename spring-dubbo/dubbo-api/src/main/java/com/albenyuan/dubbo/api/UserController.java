@@ -4,6 +4,7 @@ import com.albenyuan.dubbo.data.model.User;
 import com.albenyuan.dubbo.mvc.BaseController;
 import com.albenyuan.dubbo.mvc.BaseResult;
 import com.albenyuan.dubbo.service.UserService;
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ public class UserController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-
-    @Autowired
+    @Reference
     private UserService userService;
 
     @RequestMapping("/list")

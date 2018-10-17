@@ -15,7 +15,10 @@
 
     <dubbo:protocol port="20880"/>
 
+
+    <!--<dubbo:annotation package="com.albenyuan.dubbo.service.impl"/>-->
+
     <dubbo:reference id="userService" timeout="10000" check="false"
-                     interface="com.albenyuan.dubbo.service.UserService"/>
+    interface="com.albenyuan.dubbo.service.UserService"/>
 
 </beans>
