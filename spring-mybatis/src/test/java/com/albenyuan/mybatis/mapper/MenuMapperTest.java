@@ -1,7 +1,7 @@
 package com.albenyuan.mybatis.mapper;
 
-import com.albenyuan.core.data.SpringBaseTestCase;
 import com.albenyuan.mybatis.model.Menu;
+import com.albenyuan.spring.test.core.SpringJUnit4Case;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import java.util.List;
  * @Author Alben Yuan
  * @Date 2018-09-29 13:25
  */
-public class MenuMapperTest extends SpringBaseTestCase {
+public class MenuMapperTest extends SpringJUnit4Case {
 
     private static final Logger logger = LoggerFactory.getLogger(MenuMapperTest.class);
 

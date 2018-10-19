@@ -1,7 +1,7 @@
 package com.albenyuan.mybatis.mapper;
 
-import com.albenyuan.core.data.SpringBaseTestCase;
 import com.albenyuan.mybatis.model.User;
+import com.albenyuan.spring.test.core.SpringJUnit4Case;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Rollback
 @Transactional
-public class UserMapperTest extends SpringBaseTestCase {
+public class UserMapperTest extends SpringJUnit4Case {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(UserMapperTest.class);
 
     @Autowired
     private UserMapper userMapper;

@@ -13,7 +13,7 @@
         <module>spring-elasticsearch</module>
         <module>spring-dubbo</module>
         <module>spring-redis</module>
-        <module>spring-base</module>
+        <module>spring-core</module>
     </modules>
 
     <properties>
