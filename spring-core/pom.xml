@@ -7,13 +7,10 @@
         <groupId>com.albenyuan</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>spring-redis</artifactId>
 
-    <properties>
-        <jedis.version>2.9.0</jedis.version>
-    </properties>
+    <artifactId>spring-core</artifactId>
+
 
     <dependencies>
 
@@ -21,22 +18,19 @@
             <groupId>com.albenyuan</groupId>
             <artifactId>spring-core</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>1.8.14.RELEASE</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
         </dependency>
-
-
     </dependencies>
-
-
 </project>

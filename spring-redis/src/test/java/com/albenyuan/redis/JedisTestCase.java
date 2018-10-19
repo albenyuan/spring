@@ -1,7 +1,7 @@
 package com.albenyuan.redis;
 
 import com.albenyuan.redis.service.RedisService;
-import com.albenyuan.spring.test.core.SpringJunit4Case;
+import com.albenyuan.spring.test.core.SpringJUnit4Case;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Date 2018-10-18 14:51
  */
 @ContextConfiguration("classpath:spring-jedis.xml")
-public class JedisTestCase extends SpringJunit4Case {
+public class JedisTestCase extends SpringJUnit4Case {
 
     private static Logger logger = LoggerFactory.getLogger(JedisTestCase.class);
 
@@ -24,7 +24,6 @@ public class JedisTestCase extends SpringJunit4Case {
 
     @Autowired
     private RedisService redisService;
-
 
     @Test
     public void save() throws IOException {

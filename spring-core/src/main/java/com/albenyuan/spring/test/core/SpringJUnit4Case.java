@@ -6,10 +6,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @Author Alben Yuan
- * @Date 2018-10-18 14:48
+ * @Date 2018-10-19 17:44
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class SpringJunit4Case {
+public class SpringJUnit4Case {
+
 }
