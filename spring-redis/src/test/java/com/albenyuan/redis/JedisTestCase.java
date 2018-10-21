@@ -15,7 +15,7 @@ import java.io.IOException;
  * @Author Alben Yuan
  * @Date 2018-10-18 14:51
  */
-@ContextConfiguration("classpath:spring-jedis.xml")
+@ContextConfiguration("classpath:spring-shared-jedis.xml")
 public class JedisTestCase extends SpringJUnit4Case {
 
     private static Logger logger = LoggerFactory.getLogger(JedisTestCase.class);
