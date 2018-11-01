@@ -97,6 +97,7 @@ public class JedisServiceImpl implements RedisService {
         return r;
     }
 
+
     @Override
     public <T extends Serializable> boolean set(String key, T t) {
         Jedis jedis = open();
