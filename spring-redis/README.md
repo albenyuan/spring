@@ -326,6 +326,162 @@
 
 ### Hash
 
+- HDEL
+
+  `HDEL key field [field ...]`
+  
+  功能：
+  > 删除哈希表中的一个或者多个指定域
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 成功删除的域的数量，不存在的不会被统计。
+  
+- HEXISTS
+
+  `HEXISTS key filed`
+  
+  功能：
+  > 好希表中是否存在给定的filed
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 存在则返回1，否则返回0
+  
+- HGET
+
+  `HGET key filed`
+  
+  功能：
+  > 获取指定哈希表中给定的域
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 命中的值，不存在则返回nil
+  
+- HGETALL
+
+  `HGETALL key`
+  
+  功能：
+  > 获取好希表中的全部域和值
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 以列表形式返回哈希表中的域和值，不存在则返回空列表
+  
+- HINCRBY
+
+  `HINCRBY key field increment`
+  
+  功能：
+  > 给定的哈希表中的域自增increment。
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 操作完成后的域值
+  
+- HINCRBYFLOAT
+
+  `HINCRBYFLOAT key field increment`
+  
+  功能：
+  > 为给定哈希表 key 中的域 field 加上浮点数增量 increment 。
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 操作完成后的域值
+  
+- HKEYS
+
+  `HKEYS keys`
+  
+  功能：
+  > 获取哈希表中的全部的域
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 哈希表中所有域的列表. 当 key 不存在时，返回一个空表。
+  
+- HLEN
+
+  `HLEN key`
+  
+  功能：
+  > 获取哈希表的长度
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 长度或者0
+  
+- HMGET
+
+  `HMGET key field [field ...]`
+  
+  功能：
+  > 获取哈希表中的多个给定的域的值
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 给定域的值的列表
+  
+- HMSET
+
+  `HMSET key field value [field value ...]`
+  
+  功能：
+  > 设置哈希表中的多个域的值
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 设置成功ok， key不是哈希结构时，返回错误
+  
+- HSET
+
+  `HET key filed value`
+  
+  功能：
+  > 设置哈希表的域和值
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 新域返回1，域已经存爱则返回0
+  
+- HSETNX
+
+  `HSETNX key field value`
+  
+  功能：
+  > 哈希表中不存在filed域，则设置filed域的值为value
+  
+  复杂度：O(1)
+  
+  返回值：
+  > 成功 1， 失败 0
+  
+- HVALS
+
+  `HVALS key`
+  
+  功能：
+  >  获取哈希表中的全部值
+  
+  复杂度：O(n)
+  
+  返回值：
+  > 哈希表中的值列表
+  
 ### List
 
 ### Set
