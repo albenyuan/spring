@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
+@Table(name = "user_role")
 public class UserRole {
 
     @Id

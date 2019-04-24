@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public interface RoleRepository extends BaseRepository<Role> {
 
 
-    @Query("select r from Role  where  r.id in (select  ur.roleId from com.albenyuan.spring.shiro.entity.UserRole ur where  ur.userId = ?1)")
+    @Query("select r from Role r where  r.id in (select  ur.roleId from com.albenyuan.spring.shiro.entity.UserRole ur where  ur.userId = ?1)")
     Stream<Role> findRoleByUserId(Long userId);
 
 
