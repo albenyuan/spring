@@ -17,6 +17,7 @@ import java.util.Optional;
 @Slf4j
 public class UserRepositoryTest extends SpringJpaApplicationTests {
 
+
     @Autowired
     private UserRepository userRepository;
 

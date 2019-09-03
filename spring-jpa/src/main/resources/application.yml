@@ -6,7 +6,27 @@ spring:
     password:
   jpa:
     show-sql: true
+    hibernate:
+      cache:
+        use_second_level_cache: false
+
+      batch_size: 100
+      order_inserts: true
+      order_updates: true
     properties:
       hibernate:
+        jdbc:
+          batch_size: 100
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
         show_sql: true
-        format_sql: true
+#        format_sql: true
+logging:
+  level:
+    com.wosai: debug
+    org.hibernate.SQL: debug
+#    org.hibernate.engine.QueryParameters: trace
+#    org.hibernate.engine.query.HQLQueryPlan: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+

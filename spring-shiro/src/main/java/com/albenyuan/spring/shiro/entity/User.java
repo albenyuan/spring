@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * @Author Alben Yuan
@@ -13,7 +14,9 @@ import javax.persistence.Id;
  */
 @Data
 @Entity
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -3536068082086569052L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电子发票</title>
+</head>
+<body>
+<h1>电子发票</h1>
+<table></table>
+
+
+
+
+<script src="./jquery-3.4.1.min.js"></script>
+<script>
+
+    $(function () {
+        let params = getParams();
+        console.log(params);
+
+    });
+
+
+    function getParams() {
+        let url = location.search; //获取url中"?"符后的字串
+        let theRequest = {};
+        if (url && url.indexOf("?") >= 0) {
+            let str = url.substr(1);
+            let params = str.split("&");
+            for (let i = 0; i < params.length; i++) {
+                theRequest[params[i].split("=")[0]] = unescape(params[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+
+</script>
+</body>
+</html>

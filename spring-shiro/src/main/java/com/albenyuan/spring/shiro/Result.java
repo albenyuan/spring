@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @Date 2019-04-24 09:13
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T extends Serializable> implements Serializable {
     private static final long serialVersionUID = 7257985090091827395L;
 

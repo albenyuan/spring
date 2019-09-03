@@ -4,6 +4,7 @@ import com.albenyuan.spring.shiro.entity.Permission;
 import com.albenyuan.spring.shiro.entity.User;
 import com.albenyuan.spring.shiro.service.AccountService;
 import com.albenyuan.spring.shiro.service.RoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Author Alben Yuan
  * @Date 2019-04-06 22:03
  */
+@Slf4j
 public class CustomerShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -28,6 +30,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        log.debug("doGetAuthorizationInfo");
         //获取登录用户名
         String username = (String) principalCollection.getPrimaryPrincipal();
         //查询用户名称
@@ -51,6 +54,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
         //加这一步的目的是在Post请求的时候会先进认证，然后在到请求
 
         Object principal = token.getPrincipal();
+        log.debug("doGetAuthenticationInfo: {}",principal);
         if (null == principal) {
             return null;
         }
@@ -62,8 +66,7 @@ public class CustomerShiroRealm extends AuthorizingRealm {
             return null;
         } else {
             //这里验证authenticationToken和simpleAuthenticationInfo的信息
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, user.getPassword(), getName());
-            return simpleAuthenticationInfo;
+            return new SimpleAuthenticationInfo(username, user.getPassword(), getName());
         }
     }
 }

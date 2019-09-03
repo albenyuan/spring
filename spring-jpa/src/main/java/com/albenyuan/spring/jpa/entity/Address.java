@@ -2,10 +2,7 @@ package com.albenyuan.spring.jpa.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,12 +12,14 @@ import java.io.Serializable;
 @Data
 @Entity
 public class Address implements Serializable {
+    private static final long serialVersionUID = 8893009995320120483L;
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Basic
     private String name;
 
     private String province;
