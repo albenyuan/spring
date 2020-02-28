@@ -1,4 +1,4 @@
-package com.albenyuan.spring.test.core;
+package com.albenyuan.spring.core;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
