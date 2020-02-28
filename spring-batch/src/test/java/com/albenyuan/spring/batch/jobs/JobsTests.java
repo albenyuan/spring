@@ -33,7 +33,12 @@ public class JobsTests extends SpringBatchApplicationTests {
     private Job fileJob;
 
     @Autowired
+    @Qualifier("simpleJob")
+    private Job simpleJob;
+
+    @Autowired
     private JobLauncher jobLauncher;
+
 
     @Test
     void testFileJob() throws Exception {
@@ -66,4 +71,8 @@ public class JobsTests extends SpringBatchApplicationTests {
     }
 
 
+    @Test
+    void testSimpleJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        jobLauncher.run(simpleJob, new JobParameters());
+    }
 }

@@ -13,9 +13,10 @@ import org.springframework.batch.core.jsr.step.DecisionStep;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.item.*;
+import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.file.mapping.PassThroughLineMapper;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 
 import javax.batch.api.Decider;
 import java.util.List;
@@ -53,6 +53,7 @@ public class FileBatchConfiguration {
     @Bean
     public Job fileJob() {
         return jobBuilderFactory.get("file job")
+                .preventRestart()
                 .start(stepBuilderFactory.get("prepare").tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
@@ -64,8 +65,11 @@ public class FileBatchConfiguration {
                 }).build())
                 .next(fileStep())
                 .next(hasNextFileDecisionStep())
+
                 .on(Constants.LOOP_FILE_LOOP).to(fileStep())
-                .from(hasNextFileDecisionStep()).on("*").end()
+
+                .from(hasNextFileDecisionStep()).on(Constants.LOOP_FILE_FINISHED).end()
+
                 .end()
                 .build();
     }

@@ -3,21 +3,16 @@ package com.albenyuan.spring.batch.jobs;
 
 import com.albenyuan.spring.batch.Constants;
 import com.albenyuan.spring.batch.HasNextFileDecider;
-import com.albenyuan.spring.batch.listener.LogJobExecutionListener;
-import com.albenyuan.spring.batch.listener.LogStepExecutionListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.job.flow.support.SimpleFlow;
 import org.springframework.batch.core.jsr.step.DecisionStep;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -26,9 +21,7 @@ import org.springframework.batch.repeat.RepeatCallback;
 import org.springframework.batch.repeat.RepeatException;
 import org.springframework.batch.repeat.RepeatOperations;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
@@ -39,31 +32,12 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-public class SchemaBatchConfiguration {
+public class SchemaBatchConfiguration extends AbstractJobConfiguration {
 
 
     private static boolean isStandard(String planId) {
         return StringUtils.isEmpty(planId);
     }
-
-    @Autowired
-    private ApplicationContext context;
-
-
-    @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-
-    @Autowired
-    private JobRepository jobRepository;
-
-    @Autowired
-    private LogStepExecutionListener logStepExecutionListener;
-
-    @Autowired
-    private LogJobExecutionListener logJobExecutionListener;
 
     @Bean
     public Job schemaJob() {
