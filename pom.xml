@@ -16,6 +16,7 @@
         <module>spring-core</module>
         <module>spring-batch</module>
         <module>spring-thymeleaf</module>
+        <module>gson-demo</module>
     </modules>
 
     <properties>
