@@ -2,20 +2,25 @@ package com.albenyuan.spring.batch.jobs;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.*;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
-import org.springframework.batch.repeat.*;
+import org.springframework.batch.repeat.RepeatCallback;
+import org.springframework.batch.repeat.RepeatContext;
+import org.springframework.batch.repeat.RepeatListener;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.repeat.policy.SimpleCompletionPolicy;
 import org.springframework.batch.repeat.support.RepeatTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.retry.policy.SimpleRetryPolicy;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,7 +32,7 @@ public class SimpleTaskConfiguration extends AbstractJobConfiguration {
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
                 .start(simpleStep())
-                .next(taskletStep())
+//                .next(taskletStep())
                 .build();
     }
 
@@ -108,23 +113,17 @@ public class SimpleTaskConfiguration extends AbstractJobConfiguration {
     @Bean
     public Step simpleStep() {
         return stepBuilderFactory.get("simpleStep")
-                .<Integer, Integer>chunk(4) // 设置chunk的大小，表示一次读取数据的记录数的最大值
-                .faultTolerant().retryPolicy(new SimpleRetryPolicy())
-                .retryLimit(3)
-                .reader(new ListItemReader<Integer>(Stream.<Integer>iterate(1, n -> n + 1).limit(10).collect(Collectors.toList())) {
-                    @Override
-                    public Integer read() {
-                        Integer item = super.read();
-                        log.debug("reader: item={}", item);
-
-                        // TODO 当返回的item为null，则认为数据读取完毕
-                        return item;
-                    }
-                })
+                .<Integer, Integer>chunk(2) // 设置chunk的大小，表示一次读取数据的记录数的最大值
+//                .faultTolerant().retryPolicy(new SimpleRetryPolicy())
+//                .retryLimit(3)
+                .reader(listReader())
                 .processor(new ItemProcessor<Integer, Integer>() {
                     @Override
                     public Integer process(Integer item) throws Exception {
-                        log.debug("process: item={}", item);
+                        log.info("process: item={}", item);
+                        if (Objects.equals(4, item)) {
+                            throw new RuntimeException("item is 4");
+                        }
                         if (item == 7) {
                             // TODO 当返回null值时，表示该对象数据需要丢弃
                             return null;
@@ -135,21 +134,37 @@ public class SimpleTaskConfiguration extends AbstractJobConfiguration {
                 .writer(new ItemWriter<Integer>() {
                     @Override
                     public void write(List<? extends Integer> items) throws Exception {
-                        log.debug("write: length={}, item={}", items.size(), items);
+                        log.info("write: length={}, item={}", items.size(), items);
                     }
                 })
                 .listener(new StepExecutionListener() {
                     @Override
                     public void beforeStep(StepExecution stepExecution) {
-
+                        log.info("step before execution:{}", stepExecution);
                     }
 
                     @Override
                     public ExitStatus afterStep(StepExecution stepExecution) {
-                        return ExitStatus.COMPLETED;
+                        log.info("step after execution:{}", stepExecution);
+                        return stepExecution.getExitStatus();
                     }
                 })
                 .build();
+    }
+
+
+    @Bean
+    @StepScope
+    public ItemReader<Integer> listReader() {
+        return new ListItemReader<Integer>(Stream.<Integer>iterate(1, n -> n + 1).limit(5).collect(Collectors.toList())) {
+            @Override
+            public Integer read() {
+                Integer item = super.read();
+                log.info("reader: item={}", item);
+                // TODO 当返回的item为null，则认为数据读取完毕
+                return item;
+            }
+        };
     }
 
 
