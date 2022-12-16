@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-        <spring.version>5.2.3.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <mysql.version>5.1.47</mysql.version>
         <junit.version>4.13.1</junit.version>
         <slf4j.version>1.7.25</slf4j.version>
